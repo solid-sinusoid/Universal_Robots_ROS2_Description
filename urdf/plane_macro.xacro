@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rack">
+    <xacro:macro name="plane" params="*origin parent">
+        <link name="plane_body">
+            <!-- <inertial>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <mass value="0.0"/>
+                <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+            </inertial> -->
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="5 5 0.001" />                
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="5 5 0.001" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="plane_base_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="plane_body" />
+            <xacro:insert_block name="origin" />
+        </joint>
+    </xacro:macro>
+</robot>

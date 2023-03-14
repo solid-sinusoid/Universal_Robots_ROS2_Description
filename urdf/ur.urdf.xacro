@@ -7,6 +7,7 @@
    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_gripper_macro.urdf.xacro" />
    <xacro:include filename="$(find rbs_simulation)/rack/rack.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/table/table.xacro"/>
+   <xacro:include filename="$(find ur_description)/urdf/plane_macro.xacro"/>
 
    <!-- possible 'ur_type' values: ur3, ur3e, ur5, ur5e, ur10, ur10e, ur16e -->
    <!-- the default value should raise an error in case this was called without defining the type -->
@@ -96,12 +97,15 @@
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
 
+   <xacro:plane parent="world">
+        <origin xyz="0 0 -0.001" rpy="0 0 0"/>
+   </xacro:plane>
     <xacro:rack parent="world">
         <origin xyz="0.0 0.7 0.0" rpy="0.0 0.0 0.0"/>
     </xacro:rack>
 
     <xacro:table parent="world">
-        <origin xyz="-0.75 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <origin xyz="-0.75 0.0 0.2" rpy="0.0 0.0 0.0"/>
     </xacro:table>
 
    <xacro:if value="$(arg with_gripper)">
