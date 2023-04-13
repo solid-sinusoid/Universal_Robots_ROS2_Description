@@ -8,6 +8,7 @@
    <xacro:include filename="$(find rbs_simulation)/rack/rack.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/table/table.xacro"/>
    <xacro:include filename="$(find ur_description)/urdf/plane_macro.xacro"/>
+   <xacro:include filename="$(find ur_description)/urdf/camera.xacro"/>
 
    <!-- possible 'ur_type' values: ur3, ur3e, ur5, ur5e, ur10, ur10e, ur16e -->
    <!-- the default value should raise an error in case this was called without defining the type -->
@@ -97,9 +98,14 @@
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
 
+   <xacro:camera parent="base_link">
+    <origin xyz="0.0 1.0 1.0" rpy="0.0 0.0 0.0"/>
+   </xacro:camera>
+
    <xacro:plane parent="world">
         <origin xyz="0 0 -0.001" rpy="0 0 0"/>
    </xacro:plane>
+
     <xacro:rack parent="world">
         <origin xyz="0.0 0.7 0.0" rpy="0.0 0.0 0.0"/>
     </xacro:rack>
