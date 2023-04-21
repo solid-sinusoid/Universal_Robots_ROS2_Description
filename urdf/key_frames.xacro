@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="key_frame" params="name *origin">
+    <link name="${name}"/>
+    <joint name="${name}_joint" type="fixed">
+        <parent link="world"/>
+        <child link="${name}"/>
+        <xacro:insert_block name="origin" />
+    </joint>
+  </xacro:macro>
+
+<xacro:key_frame name="box1_place">
+    <origin xyz="-0.45 -0.055 0.46" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+<xacro:key_frame name="box2_place">
+    <origin xyz="-0.45 0.0 0.46" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+<xacro:key_frame name="box3_place">
+    <origin xyz="-0.45 0.055 0.46" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+<xacro:key_frame name="box4_place">
+    <origin xyz="-0.45 0.0275 0.49" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+<xacro:key_frame name="box5_place">
+    <origin xyz="-0.45 -0.0275 0.49" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+<xacro:key_frame name="box6_place">
+    <origin xyz="-0.45 0 0.56" rpy="-3.1415927 0.0 0.0"/>
+</xacro:key_frame>
+
+</robot>
