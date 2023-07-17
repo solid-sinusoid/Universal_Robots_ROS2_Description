@@ -70,6 +70,7 @@
     fake_sensor_commands:=false
     sim_gazebo:=false
     sim_ignition:=false
+    sim_mujoco:=false
     headless_mode:=false
     initial_positions:=${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}
     use_tool_communication:=false
@@ -88,7 +89,8 @@
     reverse_port:=50001
     script_sender_port:=50002
     reverse_ip:=0.0.0.0
-    script_command_port:=50004">
+    script_command_port:=50004
+    mujoco_model">
 
     <!-- Load configuration data from the provided .yaml files -->
     <xacro:read_model_data
@@ -110,6 +112,7 @@
       headless_mode="${headless_mode}"
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
+      sim_mujoco="${sim_mujoco}"
       script_filename="${script_filename}"
       output_recipe_filename="${output_recipe_filename}"
       input_recipe_filename="${input_recipe_filename}"
@@ -129,6 +132,7 @@
       script_sender_port="${script_sender_port}"
       reverse_ip="${reverse_ip}"
       script_command_port="${script_command_port}"
+      mujoco_model="${mujoco_model}"
       />
 
     <!-- Add URDF transmission elements (for ros_control) -->
