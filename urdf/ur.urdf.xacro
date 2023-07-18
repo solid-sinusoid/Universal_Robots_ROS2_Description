@@ -103,25 +103,9 @@
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
 
-   <xacro:camera parent="base_link">
+   <!-- <xacro:camera parent="base_link">
     <origin xyz="0.0 1.0 1.0" rpy="0.0 0.0 0.0"/>
-   </xacro:camera>
-
-   <xacro:camera parent="base_link">
-    <origin xyz="0.0 1.0 1.0" rpy="0.0 0.0 0.0"/>
-   </xacro:camera>
-
-   <!-- <xacro:plane parent="world">
-        <origin xyz="0 0 -0.001" rpy="0 0 0"/>
-   </xacro:plane>
-
-    <xacro:rack parent="world">
-        <origin xyz="0.0 0.7 0.0" rpy="0.0 0.0 0.0"/>
-    </xacro:rack>
-
-    <xacro:table parent="world">
-        <origin xyz="-0.75 0.0 0.2" rpy="0.0 0.0 0.0"/>
-    </xacro:table> -->
+   </xacro:camera> -->
 
    <xacro:if value="$(arg with_gripper)">
         <xacro:robotiq_gripper parent="tool0" sim="true" prefix="" sim_mujoco="$(arg sim_mujoco)" mujoco_model="$(arg mujoco_model)">

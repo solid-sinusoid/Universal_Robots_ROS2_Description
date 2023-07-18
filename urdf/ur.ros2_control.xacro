@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="$(find ur_description)/urdf/inc/joint_interface.xacro"/>
 
   <xacro:macro name="ur_ros2_control" params="
     name
@@ -36,7 +37,7 @@
         </xacro:if>
         <xacro:if value="${use_fake_hardware}">
           <plugin>mock_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="mock_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition or sim_mujoco}">
@@ -66,102 +67,13 @@
           <param name="tool_tcp_port">${tool_tcp_port}</param>
         </xacro:unless>
       </hardware>
-      <joint name="${prefix}shoulder_pan_joint">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['shoulder_pan_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}shoulder_lift_joint">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['shoulder_lift_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}elbow_joint">
-        <command_interface name="position">
-          <param name="min">{-pi}</param>
-          <param name="max">{pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.15</param>
-          <param name="max">3.15</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['elbow_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}wrist_1_joint">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['wrist_1_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}wrist_2_joint">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['wrist_2_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
-      <joint name="${prefix}wrist_3_joint">
-        <command_interface name="position">
-          <param name="min">{-2*pi}</param>
-          <param name="max">{2*pi}</param>
-        </command_interface>
-        <command_interface name="velocity">
-          <param name="min">-3.2</param>
-          <param name="max">3.2</param>
-        </command_interface>
-        <state_interface name="position">
-          <!-- initial position for the FakeSystem and simulation -->
-          <param name="initial_value">${initial_positions['wrist_3_joint']}</param>
-        </state_interface>
-        <state_interface name="velocity"/>
-        <state_interface name="effort"/>
-      </joint>
+
+        <xacro:joint_interface name="${prefix}shoulder_pan_joint"   p="1000"    d="0.5" />
+        <xacro:joint_interface name="${prefix}shoulder_lift_joint"  p="1000"    d="0.5" />
+        <xacro:joint_interface name="${prefix}elbow_joint"          p="500"     d="0.5" />
+        <xacro:joint_interface name="${prefix}wrist_1_joint"        p="100"     d="0.5" />
+        <xacro:joint_interface name="${prefix}wrist_2_joint"        p="10"      d="0.5" />
+        <xacro:joint_interface name="${prefix}wrist_3_joint"        p="10"      d="0.5" />
 
       <xacro:unless value="${sim_gazebo or sim_ignition or sim_mujoco}">
         <sensor name="tcp_fts_sensor">
