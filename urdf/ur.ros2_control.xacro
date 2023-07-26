@@ -5,9 +5,8 @@
   <xacro:macro name="ur_ros2_control" params="
     name
     prefix
-    use_fake_hardware:=false fake_sensor_commands:=false
+    sim_fake:=false fake_sensor_commands:=false
     sim_gazebo:=false
-    sim_ignition:=false
     headless_mode:=false
     initial_positions:=${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}
     use_tool_communication:=false
@@ -26,21 +25,18 @@
     <ros2_control name="${name}" type="system">
       <hardware>
         <xacro:if value="${sim_gazebo}">
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        </xacro:if>
-        <xacro:if value="${sim_ignition}">
           <plugin>ign_ros2_control/IgnitionSystem</plugin>
         </xacro:if>
         <xacro:if value="${sim_mujoco}">
           <plugin>cartesian_controller_simulation/Simulator</plugin>
           <param name="mujoco_model">${mujoco_model}</param>
         </xacro:if>
-        <xacro:if value="${use_fake_hardware}">
+        <xacro:if value="${sim_fake}">
           <plugin>mock_components/GenericSystem</plugin>
           <param name="mock_sensor_commands">${fake_sensor_commands}</param>
           <param name="state_following_offset">0.0</param>
         </xacro:if>
-        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition or sim_mujoco}">
+        <xacro:unless value="${sim_fake or sim_gazebo or sim_mujoco}">
           <plugin>ur_robot_driver/URPositionHardwareInterface</plugin>
           <param name="robot_ip">${robot_ip}</param>
           <param name="script_filename">${script_filename}</param>
@@ -75,7 +71,7 @@
         <xacro:joint_interface name="${prefix}wrist_2_joint"        p="10"      d="0.5" />
         <xacro:joint_interface name="${prefix}wrist_3_joint"        p="10"      d="0.5" />
 
-      <xacro:unless value="${sim_gazebo or sim_ignition or sim_mujoco}">
+      <xacro:unless value="${sim_gazebo or sim_mujoco}">
         <sensor name="tcp_fts_sensor">
           <state_interface name="force.x"/>
           <state_interface name="force.y"/>

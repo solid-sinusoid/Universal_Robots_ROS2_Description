@@ -46,10 +46,9 @@
    <xacro:arg name="tool_tcp_port" default="54321" />
 
      <!-- Simulation parameters -->
-   <xacro:arg name="use_fake_hardware" default="false" />
+   <xacro:arg name="sim_fake" default="false" />
    <xacro:arg name="fake_sensor_commands" default="false" />
    <xacro:arg name="sim_gazebo" default="false" />
-   <xacro:arg name="sim_ignition" default="false" />
    <xacro:arg name="sim_mujoco" default="false" />
    <xacro:arg name="simulation_controllers" default="" />
    <xacro:arg name="mujoco_model" default=""/>
@@ -76,11 +75,7 @@
      safety_limits="$(arg safety_limits)"
      safety_pos_margin="$(arg safety_pos_margin)"
      safety_k_position="$(arg safety_k_position)"
-     use_fake_hardware="$(arg use_fake_hardware)"
      fake_sensor_commands="$(arg fake_sensor_commands)"
-     sim_gazebo="$(arg sim_gazebo)"
-     sim_ignition="$(arg sim_ignition)"
-     sim_mujoco="$(arg sim_mujoco)"
      mujoco_model="$(arg mujoco_model)"
      headless_mode="$(arg headless_mode)"
      initial_positions="${xacro.load_yaml(initial_positions_file)}"
@@ -99,6 +94,9 @@
      input_recipe_filename="$(arg input_recipe_filename)"
      reverse_ip="$(arg reverse_ip)"
      script_command_port="$(arg script_command_port)"
+     sim_gazebo="$(arg sim_gazebo)"
+     sim_mujoco="$(arg sim_mujoco)"
+     sim_fake="$(arg sim_fake)"
      >
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
@@ -113,18 +111,7 @@
         </xacro:robotiq_gripper>
    </xacro:if>
 
-   <xacro:if value="$(arg sim_gazebo)">
-    <!-- Gazebo plugins -->
-    <gazebo reference="world">
-    </gazebo>
-    <gazebo>
-      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <parameters>$(arg simulation_controllers)</parameters>
-      </plugin>
-    </gazebo>
-  </xacro:if>
-
-  <xacro:if value="$(arg sim_ignition)">
+  <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
     <xacro:rgbd parent="tool0" prefix="">
             <origin xyz="0 -0.05 0.07" rpy="1.57 -1.57 0" />
