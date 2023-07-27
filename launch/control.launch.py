@@ -44,14 +44,13 @@ def generate_launch_description():
         )
     )
     robot_description_content = LaunchConfiguration("robot_description")
-    runtime_config_package = LaunchConfiguration("runtime_config_package")
     controllers_file = LaunchConfiguration("controllers_file")
     start_joint_controller = LaunchConfiguration("start_joint_controller")
     with_gripper_condition = LaunchConfiguration("with_gripper")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     
     initial_joint_controllers_file_path = PathJoinSubstitution(
-        [FindPackageShare(runtime_config_package), "config", controllers_file]
+        [FindPackageShare("ur_description"), "config", controllers_file]
     )
     robot_description = {"robot_description": robot_description_content}
 
