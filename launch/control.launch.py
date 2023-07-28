@@ -43,11 +43,19 @@ def generate_launch_description():
             description="YAML file with the controllers configuration.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "cartesian_controllers",
+            default_value="true",
+            description="Launch cartesian controllres",
+        )
+    )
     robot_description_content = LaunchConfiguration("robot_description")
     controllers_file = LaunchConfiguration("controllers_file")
     start_joint_controller = LaunchConfiguration("start_joint_controller")
     with_gripper_condition = LaunchConfiguration("with_gripper")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
+    cartesian_controllers = LaunchConfiguration("cartesian_controllers")
     
     initial_joint_controllers_file_path = PathJoinSubstitution(
         [FindPackageShare("ur_description"), "config", controllers_file]
@@ -63,8 +71,8 @@ def generate_launch_description():
             ('motion_control_handle/target_frame', 'target_frame'),
             ('cartesian_compliance_controller/target_frame', 'target_frame'),
             ('cartesian_compliance_controller/target_wrench', 'target_wrench'),
-            ('cartesian_compliance_controller/ft_sensor_wrench', 'ft_sensor_wrench'),
-            ]
+            ('cartesian_compliance_controller/ft_sensor_wrench', 'ft_sensor_wrench')],
+        condition=IfCondition(cartesian_controllers)
     )
 
     joint_state_broadcaster_spawner = Node(
@@ -97,17 +105,20 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["cartesian_motion_controller", "--inactive", "-c", "/controller_manager"],
+        condition=IfCondition(cartesian_controllers)
     )
     motion_control_handle_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["motion_control_handle", "--inactive", "-c", "/controller_manager"],
+        condition=IfCondition(cartesian_controllers)
     )
     
     cartesian_compliance_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["cartesian_compliance_controller", "--inactive", "-c", "/controller_manager"],
+        condition=IfCondition(cartesian_controllers)
     )
     
     nodes_to_start = [

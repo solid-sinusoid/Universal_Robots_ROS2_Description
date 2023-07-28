@@ -106,7 +106,14 @@
    </xacro:camera> -->
 
    <xacro:if value="$(arg with_gripper)">
-        <xacro:robotiq_gripper parent="tool0" sim="true" prefix="" sim_mujoco="$(arg sim_mujoco)" mujoco_model="$(arg mujoco_model)">
+        <xacro:robotiq_gripper 
+        parent="tool0" 
+        sim="true" 
+        prefix="" 
+        sim_mujoco="$(arg sim_mujoco)" 
+        mujoco_model="$(arg mujoco_model)" 
+        sim_gazebo="$(arg sim_gazebo)"
+        use_fake_hardware="$(arg sim_fake)">
             <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:robotiq_gripper>
    </xacro:if>
