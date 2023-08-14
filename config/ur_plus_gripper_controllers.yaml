@@ -10,13 +10,13 @@ controller_manager:
     gripper_controller:
       type: forward_command_controller/ForwardCommandController
 
-    io_and_status_controller:
+    ur_io_and_status_controller:
       type: ur_controllers/GPIOController
 
-    speed_scaling_state_broadcaster:
+    ur_speed_scaling_state_broadcaster:
       type: ur_controllers/SpeedScalingStateBroadcaster
 
-    force_torque_sensor_broadcaster:
+    ur_force_torque_sensor_broadcaster:
       type: ur_controllers/ForceTorqueStateBroadcaster
 
     joint_trajectory_controller:
@@ -33,6 +33,9 @@ controller_manager:
 
     forward_position_controller:
       type: position_controllers/JointGroupPositionController
+
+    force_torque_sensor_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcasterr
 
 
 speed_scaling_state_broadcaster:
@@ -180,3 +183,8 @@ motion_control_handle:
       - wrist_1_joint
       - wrist_2_joint
       - wrist_3_joint
+
+force_torque_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: force_torque_sensor
+    frame_id: tool0

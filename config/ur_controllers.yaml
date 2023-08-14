@@ -6,13 +6,13 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    io_and_status_controller:
+    ur_io_and_status_controller:
       type: ur_controllers/GPIOController
 
-    speed_scaling_state_broadcaster:
+    ur_speed_scaling_state_broadcaster:
       type: ur_controllers/SpeedScalingStateBroadcaster
 
-    force_torque_sensor_broadcaster:
+    ur_force_torque_sensor_broadcaster:
       type: ur_controllers/ForceTorqueStateBroadcaster
 
     joint_trajectory_controller:

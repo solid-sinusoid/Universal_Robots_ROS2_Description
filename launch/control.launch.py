@@ -95,10 +95,10 @@ def generate_launch_description():
         condition=UnlessCondition(start_joint_controller),
     )
     
-    gripper_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             "gripper_controller"],
-        output='screen',
+    gripper_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["gripper_controller", "--active", "-c", "/controller_manager"],
         condition=IfCondition(with_gripper_condition)
     )
     cartesian_motion_controller_spawner = Node(
@@ -121,6 +121,12 @@ def generate_launch_description():
         condition=IfCondition(cartesian_controllers)
     )
     
+    force_torque_sensor_broadcaster = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["force_torque_sensor_broadcaster", "--active", "-c", "/controller_manager"]
+    )
+    
     nodes_to_start = [
         control_node,
         joint_state_broadcaster_spawner,
@@ -129,7 +135,8 @@ def generate_launch_description():
         gripper_controller,
         cartesian_motion_controller_spawner,
         motion_control_handle_spawner,
-        cartesian_compliance_controller_spawner
+        cartesian_compliance_controller_spawner,
+        force_torque_sensor_broadcaster
     ]
     
     return LaunchDescription(declared_arguments + nodes_to_start)

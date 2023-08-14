@@ -70,6 +70,16 @@
         <xacro:joint_interface name="${prefix}wrist_1_joint"        p="100"     d="0.5" />
         <xacro:joint_interface name="${prefix}wrist_2_joint"        p="10"      d="0.5" />
         <xacro:joint_interface name="${prefix}wrist_3_joint"        p="10"      d="0.5" />
+        <xacro:if value="${sim_gazebo}">
+            <sensor name="ft_sensor">
+                <state_interface name="force.x"/>
+                <state_interface name="force.y"/>
+                <state_interface name="force.z"/>
+                <state_interface name="torque.x"/>
+                <state_interface name="torque.y"/>
+                <state_interface name="torque.z"/>
+              </sensor>
+        </xacro:if>
 
       <xacro:unless value="${sim_gazebo or sim_mujoco}">
         <sensor name="tcp_fts_sensor">
