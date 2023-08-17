@@ -130,11 +130,9 @@
             <parameters>$(arg simulation_controllers)</parameters>
         <controller_manager_node_name>$(arg prefix)controller_manager</controller_manager_node_name>
       </plugin>
-      <plugin
-      filename="ignition-gazebo-forcetorque-system"
-      name="ignition::gazebo::systems::ForceTorque">
-    </plugin>
     </gazebo>
+
+    <xacro:rbs_fts name = "ft_sensor" prefix="" link="ft_frame"/>
   </xacro:if>
 
 </robot>

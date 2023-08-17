@@ -402,18 +402,5 @@
       <child link="${prefix}tool0"/>
     </joint>
 
-    <gazebo reference="${prefix}tool0">
-        <sensor name="ft_sensor" type="force_torque">
-          <always_on>1</always_on>
-          <update_rate>10.0</update_rate>
-          <visualize>true</visualize>
-          <topic>force_and_torque</topic>
-          <force_torque>
-            <frame>sensor</frame>
-            <measure_direction>child_to_parent</measure_direction>
-          </force_torque>
-        </sensor>
-      </gazebo>
-
   </xacro:macro>
 </robot>

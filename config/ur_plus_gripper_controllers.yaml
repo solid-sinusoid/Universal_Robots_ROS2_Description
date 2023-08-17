@@ -35,7 +35,7 @@ controller_manager:
       type: position_controllers/JointGroupPositionController
 
     force_torque_sensor_broadcaster:
-      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcasterr
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
 
 
 speed_scaling_state_broadcaster:
@@ -186,5 +186,5 @@ motion_control_handle:
 
 force_torque_sensor_broadcaster:
   ros__parameters:
-    sensor_name: force_torque_sensor
-    frame_id: tool0
+    sensor_name: ft_sensor
+    frame_id: ft_frame

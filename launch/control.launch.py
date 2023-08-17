@@ -98,7 +98,7 @@ def generate_launch_description():
     gripper_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["gripper_controller", "--active", "-c", "/controller_manager"],
+        arguments=["gripper_controller", "-c", "/controller_manager"],
         condition=IfCondition(with_gripper_condition)
     )
     cartesian_motion_controller_spawner = Node(
@@ -124,7 +124,7 @@ def generate_launch_description():
     force_torque_sensor_broadcaster = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["force_torque_sensor_broadcaster", "--active", "-c", "/controller_manager"]
+        arguments=["force_torque_sensor_broadcaster", "-c", "/controller_manager"]
     )
     
     nodes_to_start = [
