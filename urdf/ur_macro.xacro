@@ -379,18 +379,6 @@
       <parent link="${prefix}wrist_3_link" />
       <child link="${prefix}flange" />
       <origin xyz="0 0 0" rpy="0 ${-pi/2.0} ${-pi/2.0}" />
-      <gazebo>
-        <sensor name="force_torque_sensor" type="force_torque">
-            <update_rate>30</update_rate>
-            <always_on>true</always_on>
-            <visualize>true</visualize>
-            <topic>force_torque1</topic>
-            <force_torque>
-              <frame>${prefix}flange</frame>
-              <measure_direction>parent_to_child</measure_direction>
-            </force_torque>
-          </sensor>
-      </gazebo>
     </joint>
 
     <!-- ROS-Industrial 'tool0' frame - all-zeros tool frame -->

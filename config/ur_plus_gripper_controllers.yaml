@@ -38,12 +38,12 @@ controller_manager:
       type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
 
 
-speed_scaling_state_broadcaster:
+ur_speed_scaling_state_broadcaster:
   ros__parameters:
     state_publish_rate: 100.0
 
 
-force_torque_sensor_broadcaster:
+ur_force_torque_sensor_broadcaster:
   ros__parameters:
     sensor_name: tcp_fts_sensor
     state_interface_names:
@@ -187,4 +187,12 @@ motion_control_handle:
 force_torque_sensor_broadcaster:
   ros__parameters:
     sensor_name: ft_sensor
+    state_interface_names:
+      - force.x
+      - force.y
+      - force.z
+      - torque.x
+      - torque.y
+      - torque.z
     frame_id: ft_frame
+    topic_name: ft_data

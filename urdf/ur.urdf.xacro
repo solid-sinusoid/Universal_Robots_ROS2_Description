@@ -132,7 +132,7 @@
       </plugin>
     </gazebo>
 
-    <xacro:rbs_fts name = "ft_sensor" prefix="" link="ft_frame"/>
+    <xacro:rbs_fts name = "ft_sensor" prefix="$(arg prefix)" link="wrist_3"/>
   </xacro:if>
 
 </robot>

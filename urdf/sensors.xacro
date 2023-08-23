@@ -55,7 +55,7 @@
 
     <xacro:macro name="rbs_fts" params="name prefix link">
 
-    <ros2_control name="${name}" type="sensor">
+    <ros2_control name="${prefix}${name}" type="sensor">
       <hardware>
           <plugin>ign_ros2_control/IgnitionFts</plugin>
       </hardware>
@@ -70,19 +70,15 @@
       </sensor>
     </ros2_control>
 
-    <gazebo>
-        <plugin filename="ignition-gazebo-forcetorque-system" name="ignition::gazebo::systems::ForceTorque"/>
-    </gazebo>
-
-    <gazebo reference="${prefix}${link}">
+    <gazebo reference="${prefix}${link}_joint">
         <sensor name="${prefix}${name}" type="force_torque">
-          <always_on>1</always_on>
-          <update_rate>10.0</update_rate>
+          <always_on>true</always_on>
+          <update_rate>50</update_rate>
           <visualize>true</visualize>
           <topic>ft_data</topic>
           <force_torque>
             <frame>sensor</frame>
-            <measure_direction>child_to_parent</measure_direction>
+            <measure_direction>parent_to_child</measure_direction>
           </force_torque>
         </sensor>
       </gazebo>
