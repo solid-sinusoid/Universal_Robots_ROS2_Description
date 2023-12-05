@@ -4,7 +4,7 @@
    <xacro:arg name="name" default="ur"/>
    <!-- import main macro -->
    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
-   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_gripper_macro.urdf.xacro" />
+   <xacro:include filename="$(find rbs_schunk_egp_n_n_b)/urdf/schunk_gripper_macro.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/rack/rack.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/table/table.xacro"/>
    <xacro:include filename="$(find ur_description)/urdf/plane_macro.xacro"/>
@@ -106,16 +106,9 @@
    </xacro:camera> -->
 
    <xacro:if value="$(arg with_gripper)">
-        <xacro:robotiq_gripper 
-        parent="tool0" 
-        sim="true" 
-        prefix="" 
-        sim_mujoco="$(arg sim_mujoco)" 
-        mujoco_model="$(arg mujoco_model)" 
-        sim_gazebo="$(arg sim_gazebo)"
-        use_fake_hardware="$(arg sim_fake)">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:robotiq_gripper>
+        <xacro:schunk_gripper prefix="schunk" parent="tool0" sim_name="gazebo">
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> 
+        </xacro:schunk_gripper>
    </xacro:if>
 
   <xacro:if value="$(arg sim_gazebo)">

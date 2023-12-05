@@ -46,7 +46,7 @@
             </sensor>
         </gazebo>
 
-        <joint name="${prefix}rgbd_camera_to_parent" type="fixed">
+        <joint name="${prefix}rgbd_camera_joint" type="fixed">
             <parent link="${parent}" />
             <child link="${prefix}rgbd_camera" />
             <xacro:insert_block name="origin" />
