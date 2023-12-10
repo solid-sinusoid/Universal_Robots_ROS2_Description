@@ -106,7 +106,7 @@
    </xacro:camera> -->
 
    <xacro:if value="$(arg with_gripper)">
-        <xacro:schunk_gripper prefix="schunk" parent="tool0" sim_name="gazebo">
+        <xacro:schunk_gripper prefix="" gripper_name="schunk" parent="tool0" sim_name="gazebo">
           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> 
         </xacro:schunk_gripper>
    </xacro:if>

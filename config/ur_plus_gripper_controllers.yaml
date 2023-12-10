@@ -136,7 +136,7 @@ forward_position_controller:
 gripper_controller:
   ros__parameters:
     joints:
-      - robotiq_85_left_knuckle_joint
+      - schunk_r_finger_joint
     interface_name: position
   
 cartesian_motion_controller:
