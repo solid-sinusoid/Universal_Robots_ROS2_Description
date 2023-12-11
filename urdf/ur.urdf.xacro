@@ -79,7 +79,6 @@
      safety_pos_margin="$(arg safety_pos_margin)"
      safety_k_position="$(arg safety_k_position)"
      fake_sensor_commands="$(arg fake_sensor_commands)"
-     mujoco_model="$(arg mujoco_model)"
      headless_mode="$(arg headless_mode)"
      initial_positions="${xacro.load_yaml(initial_positions_file)}"
      use_tool_communication="$(arg use_tool_communication)"
@@ -135,7 +134,7 @@
       </plugin>
     </gazebo>
 
-    <xacro:rbs_fts name = "ft_sensor" prefix="$(arg prefix)" link="wrist_3"/>
+    <xacro:rbs_fts name = "ft_sensor" prefix="$(arg tf_prefix)" link="wrist_3"/>
   </xacro:if>
 
 </robot>

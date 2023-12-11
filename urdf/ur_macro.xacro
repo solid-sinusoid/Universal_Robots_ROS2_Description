@@ -89,7 +89,6 @@
     script_sender_port:=50002
     reverse_ip:=0.0.0.0
     script_command_port:=50004
-    mujoco_model
     trajectory_port:=50003
     non_blocking_read:=true
     keep_alive_count:=2"
@@ -109,7 +108,7 @@
     <xacro:include filename="$(find ur_description)/urdf/ur.ros2_control.xacro" />
     <!-- ros2 control instance -->
     <xacro:ur_ros2_control
-      name="${name}" prefix="${prefix}"
+      name="${name}" tf_prefix="${tf_prefix}"
       sim_fake="${sim_fake}"
       initial_positions="${initial_positions}"
       fake_sensor_commands="${fake_sensor_commands}"
@@ -119,7 +118,6 @@
       script_filename="${script_filename}"
       output_recipe_filename="${output_recipe_filename}"
       input_recipe_filename="${input_recipe_filename}"
-      tf_prefix="${tf_prefix}"
       hash_kinematics="${kinematics_hash}"
       robot_ip="${robot_ip}"
       use_tool_communication="${use_tool_communication}"
@@ -138,11 +136,10 @@
       trajectory_port="${trajectory_port}"
       non_blocking_read="${non_blocking_read}"
       keep_alive_count="${keep_alive_count}"
-      mujoco_model="${mujoco_model}"
       />
 
     <!-- Add URDF transmission elements (for ros_control) -->
-    <!--<xacro:ur_arm_transmission prefix="${prefix}" hw_interface="${transmission_hw_interface}" />-->
+    <!--<xacro:ur_arm_transmission tf_prefix="${tf_prefix}" hw_interface="${transmission_hw_interface}" />-->
     <!-- Placeholder for ros2_control transmission which don't yet exist -->
 
     <!-- links -  main serial chain -->

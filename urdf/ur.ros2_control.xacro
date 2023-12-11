@@ -4,7 +4,6 @@
 
   <xacro:macro name="ur_ros2_control" params="
     name
-    prefix
     sim_fake:=false fake_sensor_commands:=false
     sim_gazebo:=false
     headless_mode:=false
@@ -23,7 +22,6 @@
     non_blocking_read:=true
     keep_alive_count:=2
     
-    mujoco_model
     sim_mujoco">
 
     <ros2_control name="${name}" type="system">
@@ -31,10 +29,10 @@
         <xacro:if value="${sim_gazebo}">
           <plugin>ign_ros2_control/IgnitionSystem</plugin>
         </xacro:if>
-        <xacro:if value="${sim_mujoco}">
+        <!-- <xacro:if value="${sim_mujoco}">
           <plugin>cartesian_controller_simulation/Simulator</plugin>
           <param name="mujoco_model">${mujoco_model}</param>
-        </xacro:if>
+        </xacro:if> -->
         <xacro:if value="${sim_fake}">
           <plugin>mock_components/GenericSystem</plugin>
           <param name="mock_sensor_commands">${fake_sensor_commands}</param>
@@ -70,12 +68,12 @@
         </xacro:unless>
       </hardware>
 
-        <xacro:joint_interface name="${prefix}shoulder_pan_joint"   p="1000"    d="0.5" />
-        <xacro:joint_interface name="${prefix}shoulder_lift_joint"  p="1000"    d="0.5" />
-        <xacro:joint_interface name="${prefix}elbow_joint"          p="500"     d="0.5" />
-        <xacro:joint_interface name="${prefix}wrist_1_joint"        p="100"     d="0.5" />
-        <xacro:joint_interface name="${prefix}wrist_2_joint"        p="10"      d="0.5" />
-        <xacro:joint_interface name="${prefix}wrist_3_joint"        p="10"      d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}shoulder_pan_joint"   p="1000"    d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}shoulder_lift_joint"  p="1000"    d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}elbow_joint"          p="500"     d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}wrist_1_joint"        p="100"     d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}wrist_2_joint"        p="10"      d="0.5" />
+        <xacro:joint_interface name="${tf_prefix}wrist_3_joint"        p="10"      d="0.5" />
 
       <xacro:unless value="${sim_gazebo or sim_mujoco}">
         <sensor name="tcp_fts_sensor">
