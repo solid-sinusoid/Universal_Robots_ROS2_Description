@@ -4,7 +4,6 @@
    <xacro:arg name="name" default="ur"/>
    <!-- import main macro -->
    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
-   <xacro:include filename="$(find rbs_schunk_egp_n_n_b)/urdf/schunk_gripper_macro.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/rack/rack.xacro"/>
    <xacro:include filename="$(find rbs_simulation)/table/table.xacro"/>
    <xacro:include filename="$(find ur_description)/urdf/plane_macro.xacro"/>
@@ -25,6 +24,7 @@
    <xacro:arg name="safety_pos_margin" default="0.15"/>
    <xacro:arg name="safety_k_position" default="20"/>
    <xacro:arg name="with_gripper" default="false"/>
+   <xacro:arg name="gripper_name" default="robotiq"/>
    <!-- ros2_control related parameters -->
    <xacro:arg name="headless_mode" default="false" />
    <xacro:arg name="robot_ip" default="0.0.0.0" />
@@ -118,7 +118,7 @@
 
   <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
-    <xacro:rgbd parent="tool0" prefix="inner_">
+    <xacro:rgbd parent="${tf_prefix}tool0" prefix="inner_">
             <origin xyz="0 -0.05 0.07" rpy="1.57 -1.57 0" />
     </xacro:rgbd>
     <!-- -2.0 -0.55 1.44 0 0.44 0.44 -->
